@@ -11,7 +11,7 @@ interface PopularCardProps {
 export default function PopularCard({ article, rank }: PopularCardProps) {
   return (
     <Link
-      href={`/berita/${article.slug}`}
+      href={`/berita/${article.id}`}
       className="group flex bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"
     >
       <div className="relative w-28 flex-shrink-0">

@@ -1,7 +1,7 @@
 export interface NewsArticle {
   id: string;
+  slug?: string;
   title: string;
-  slug: string;
   category: string;
   categoryLabel: string;
   author: string;
@@ -21,7 +21,7 @@ export interface NewsResponse {
 }
 
 export interface Category {
-  slug: string;
+  id: string;
   label: string;
   endpoint: string;
 }

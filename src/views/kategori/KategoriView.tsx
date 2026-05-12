@@ -5,14 +5,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 interface KategoriViewProps {
-  categorySlug: string;
+  categoryId: string;
 }
 
-export default function KategoriView({ categorySlug }: KategoriViewProps) {
-  const categoryMeta = CATEGORY_MAP[categorySlug];
+export default function KategoriView({ categoryId }: KategoriViewProps) {
+  const categoryMeta = CATEGORY_MAP[categoryId];
   if (!categoryMeta) notFound();
 
-  const articles = getArticlesByCategory(categorySlug);
+  const articles = getArticlesByCategory(categoryId);
   const popular = getPopularArticles(5);
 
   return (

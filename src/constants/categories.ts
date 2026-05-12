@@ -2,49 +2,49 @@ import { Category } from "@/types/news";
 
 export const CATEGORIES: Category[] = [
   {
-    slug: "terbaru",
+    id: "terbaru",
     label: "Terbaru",
     endpoint: "/api/cnn-news",
   },
   {
-    slug: "nasional",
+    id: "nasional",
     label: "Nasional",
     endpoint: "/api/cnn-news/nasional",
   },
   {
-    slug: "internasional",
+    id: "internasional",
     label: "Internasional",
     endpoint: "/api/cnn-news/internasional",
   },
   {
-    slug: "ekonomi",
+    id: "ekonomi",
     label: "Ekonomi",
     endpoint: "/api/cnbc-news",
   },
   {
-    slug: "olahraga",
+    id: "olahraga",
     label: "Olahraga",
     endpoint: "/api/cnn-news/olahraga",
   },
   {
-    slug: "teknologi",
+    id: "teknologi",
     label: "Teknologi",
     endpoint: "/api/cnn-news/teknologi",
   },
   {
-    slug: "hiburan",
+    id: "hiburan",
     label: "Hiburan",
     endpoint: "/api/cnn-news/hiburan",
   },
   {
-    slug: "gaya-hidup",
+    id: "gaya-hidup",
     label: "Gaya Hidup",
     endpoint: "/api/cnn-news/gaya-hidup",
   },
 ];
 
 export const CATEGORY_MAP = Object.fromEntries(
-  CATEGORIES.map((cat) => [cat.slug, cat])
+  CATEGORIES.map((cat) => [cat.id, cat])
 );
 
 export const NAV_CATEGORIES = CATEGORIES;

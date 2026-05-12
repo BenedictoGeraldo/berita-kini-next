@@ -6,12 +6,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const cat = CATEGORY_MAP[slug];
+  const { id } = await params;
+  const cat = CATEGORY_MAP[id];
   if (!cat) return {};
   return {
     title: `Berita ${cat.label}`,
@@ -20,17 +20,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  return Object.keys(CATEGORY_MAP).map((slug) => ({ slug }));
+  return Object.keys(CATEGORY_MAP).map((id) => ({ id }));
 }
 
 export default async function KategoriPage({ params }: Props) {
-  const { slug } = await params;
-  if (!CATEGORY_MAP[slug]) notFound();
+  const { id } = await params;
+  if (!CATEGORY_MAP[id]) notFound();
 
   return (
     <>
       <Navbar />
-      <KategoriView categorySlug={slug} />
+      <KategoriView categoryId={id} />
       <Footer />
     </>
   );

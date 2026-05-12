@@ -1,16 +1,16 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import DetailView from "@/views/berita/DetailView";
-import { fakeArticles, getArticleBySlug } from "@/lib/fakeDb";
+import { fakeArticles, getArticleById } from "@/lib/fakeDb";
 import type { Metadata } from "next";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const { id } = await params;
+  const article = getArticleById(id);
   if (!article) return {};
   return {
     title: article.title,
@@ -25,16 +25,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  return fakeArticles.map((article) => ({ slug: article.slug }));
+  return fakeArticles.map((article) => ({ id: article.id }));
 }
 
 export default async function BeritaDetailPage({ params }: Props) {
-  const { slug } = await params;
+  const { id } = await params;
   return (
     <>
       <Navbar />
-      <div style={{ paddingTop: "24px", paddingBottom: "24px" }}>
-        <DetailView slug={slug} />
+      <div>
+        <DetailView id={id} />
       </div>
       <Footer />
     </>
