@@ -5,3 +5,5 @@ export { default as NewsCard } from "./ui/NewsCard";
 export { default as PopularCard } from "./ui/PopularCard";
 export { default as Sidebar } from "./ui/Sidebar";
 export { default as SectionHeader } from "./ui/SectionHeader";
+export { default as HeadlineCarousel } from "./ui/HeadlineCarousel";
+export { default as PaginatedGrid } from "./ui/PaginatedGrid";

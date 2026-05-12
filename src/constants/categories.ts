@@ -1,50 +1,18 @@
 import { Category } from "@/types/news";
 
 export const CATEGORIES: Category[] = [
-  {
-    slug: "terbaru",
-    label: "Terbaru",
-    endpoint: "/api/cnn-news",
-  },
-  {
-    slug: "nasional",
-    label: "Nasional",
-    endpoint: "/api/cnn-news/nasional",
-  },
-  {
-    slug: "internasional",
-    label: "Internasional",
-    endpoint: "/api/cnn-news/internasional",
-  },
-  {
-    slug: "ekonomi",
-    label: "Ekonomi",
-    endpoint: "/api/cnbc-news",
-  },
-  {
-    slug: "olahraga",
-    label: "Olahraga",
-    endpoint: "/api/cnn-news/olahraga",
-  },
-  {
-    slug: "teknologi",
-    label: "Teknologi",
-    endpoint: "/api/cnn-news/teknologi",
-  },
-  {
-    slug: "hiburan",
-    label: "Hiburan",
-    endpoint: "/api/cnn-news/hiburan",
-  },
-  {
-    slug: "gaya-hidup",
-    label: "Gaya Hidup",
-    endpoint: "/api/cnn-news/gaya-hidup",
-  },
+  { id: "terbaru", label: "Terbaru", endpoint: "/api/antara-news/terkini" },
+  { id: "nasional", label: "Nasional", endpoint: "/api/cnn-news/nasional" },
+  { id: "internasional", label: "Internasional", endpoint: "/api/cnn-news/internasional" },
+  { id: "ekonomi", label: "Ekonomi", endpoint: "/api/antara-news/ekonomi" },
+  { id: "olahraga", label: "Olahraga", endpoint: "/api/cnn-news/olahraga" },
+  { id: "teknologi", label: "Teknologi", endpoint: "/api/cnn-news/teknologi" },
+  { id: "hiburan", label: "Hiburan", endpoint: "/api/cnn-news/hiburan" },
+  { id: "gaya-hidup", label: "Gaya Hidup", endpoint: "/api/cnn-news/gaya-hidup" },
 ];
 
-export const CATEGORY_MAP = Object.fromEntries(
-  CATEGORIES.map((cat) => [cat.slug, cat])
+export const CATEGORY_MAP: Record<string, Category> = Object.fromEntries(
+  CATEGORIES.map((cat) => [cat.id, cat]),
 );
 
 export const NAV_CATEGORIES = CATEGORIES;
