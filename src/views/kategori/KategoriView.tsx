@@ -1,4 +1,4 @@
-import { NewsCard, SectionHeader, Sidebar } from "@/components";
+import { PaginatedGrid, SectionHeader, Sidebar } from "@/components";
 import { getNewsByCategory, getPopularArticles } from "@/services/berita";
 import { CATEGORY_MAP } from "@/constants/categories";
 import { notFound } from "next/navigation";
@@ -38,20 +38,11 @@ export default async function KategoriView({ categoryId }: KategoriViewProps) {
             ) : (
               <section>
                 <SectionHeader title={`Berita ${categoryMeta.label}`} />
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  {articles.map((article) => (
-                    <NewsCard key={article.id} article={article} />
-                  ))}
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-center justify-between mt-10 pt-6 border-t border-gray-100 gap-4">
-                  <p className="text-sm text-gray-500">Showing 1 to {articles.length} of {articles.length} results</p>
-                  <div className="flex items-center gap-1">
-                    <button className="px-3 py-1 text-sm text-gray-400 hover:text-blue-600 cursor-not-allowed">‹ Previous</button>
-                    <button className="w-8 h-8 flex items-center justify-center rounded bg-blue-600 text-white text-sm font-medium">1</button>
-                    <button className="px-3 py-1 text-sm text-gray-400 hover:text-blue-600 cursor-not-allowed">Next ›</button>
-                  </div>
-                </div>
+                <PaginatedGrid
+                  articles={articles}
+                  pageSize={9}
+                  showHeader={false}
+                />
               </section>
             )}
           </main>

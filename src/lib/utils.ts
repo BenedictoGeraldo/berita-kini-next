@@ -6,7 +6,7 @@ const PLACEHOLDER =
 function hashLink(link: string): string {
   let hash = 0;
   for (let i = 0; i < link.length; i++) {
-    hash = ((hash << 5) - hash) + link.charCodeAt(i);
+    hash = (hash << 5) - hash + link.charCodeAt(i);
     hash |= 0;
   }
   return Math.abs(hash).toString(16);
@@ -22,14 +22,19 @@ export function generateSlug(title: string): string {
     .slice(0, 120);
 }
 
-function resolveImage(raw: ApiNewsItem["image"]): { small: string; large: string } {
+function resolveImage(raw: ApiNewsItem["image"]): {
+  small: string;
+  large: string;
+} {
   if (!raw) {
     return { small: PLACEHOLDER, large: PLACEHOLDER };
   }
 
   // Antara sends image as string, not object
   if (typeof raw === "string") {
-    return raw.startsWith("http") ? { small: raw, large: raw } : { small: PLACEHOLDER, large: PLACEHOLDER };
+    return raw.startsWith("http")
+      ? { small: raw, large: raw }
+      : { small: PLACEHOLDER, large: PLACEHOLDER };
   }
 
   const small =

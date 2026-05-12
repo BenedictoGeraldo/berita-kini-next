@@ -5,15 +5,19 @@ import { NewsCard, SectionHeader } from "@/components";
 import type { NewsArticle } from "@/types/news";
 
 interface PaginatedGridProps {
-  title: string;
+  title?: string;
   articles: NewsArticle[];
   pageSize?: number;
+  showHeader?: boolean;
+  gridClass?: string;
 }
 
 export default function PaginatedGrid({
-  title,
+  title = "",
   articles,
   pageSize = 8,
+  showHeader = true,
+  gridClass = "grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
 }: PaginatedGridProps) {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(articles.length / pageSize);
@@ -22,9 +26,10 @@ export default function PaginatedGrid({
   const paged = articles.slice(start, end);
 
   return (
-    <section>
-      <SectionHeader title={title} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <>
+      {showHeader && <SectionHeader title={title} />}
+
+      <div className={`grid ${gridClass} gap-6`}>
         {paged.map((article) => (
           <NewsCard key={article.id} article={article} />
         ))}
@@ -80,6 +85,6 @@ export default function PaginatedGrid({
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 }
