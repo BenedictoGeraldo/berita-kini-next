@@ -1,5 +1,5 @@
 import { NewsCard, SectionHeader, Sidebar } from "@/components";
-import { getArticlesByCategory, getPopularArticles } from "@/lib/fakeDb";
+import { getNewsByCategory, getPopularArticles } from "@/services/berita";
 import { CATEGORY_MAP } from "@/constants/categories";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -8,16 +8,15 @@ interface KategoriViewProps {
   categoryId: string;
 }
 
-export default function KategoriView({ categoryId }: KategoriViewProps) {
+export default async function KategoriView({ categoryId }: KategoriViewProps) {
   const categoryMeta = CATEGORY_MAP[categoryId];
   if (!categoryMeta) notFound();
 
-  const articles = getArticlesByCategory(categoryId);
-  const popular = getPopularArticles(5);
+  const articles = await getNewsByCategory(categoryId);
+  const popular = await getPopularArticles(5);
 
   return (
     <div className="bg-white min-h-screen">
-      {/* HEADER KATEGORI */}
       <div className="bg-white border-b border-gray-100 py-10 mb-8">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
@@ -44,8 +43,7 @@ export default function KategoriView({ categoryId }: KategoriViewProps) {
                     <NewsCard key={article.id} article={article} />
                   ))}
                 </div>
-                
-                {/* PAGINATION */}
+
                 <div className="flex flex-col sm:flex-row items-center justify-between mt-10 pt-6 border-t border-gray-100 gap-4">
                   <p className="text-sm text-gray-500">Showing 1 to {articles.length} of {articles.length} results</p>
                   <div className="flex items-center gap-1">

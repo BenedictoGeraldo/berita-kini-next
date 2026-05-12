@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { NewsArticle } from "@/types/news";
 
 interface SidebarProps {
@@ -18,7 +17,7 @@ export default function Sidebar({ popularArticles }: SidebarProps) {
           {popularArticles.map((article, index) => (
             <Link
               key={article.id}
-              href={`/berita/${article.id}`}
+              href={`/berita/${article.id}?kategori=${article.category}`}
               className="flex gap-3 p-4 border-b border-gray-100 hover:bg-gray-50 transition-colors group last:border-b-0"
             >
               <span className="text-2xl font-black text-blue-100 leading-none min-w-[28px] mt-1">

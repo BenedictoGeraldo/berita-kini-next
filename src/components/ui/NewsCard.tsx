@@ -10,7 +10,7 @@ interface NewsCardProps {
 export default function NewsCard({ article }: NewsCardProps) {
   return (
     <Link
-      href={`/berita/${article.id}`}
+      href={`/berita/${article.id}?kategori=${article.category}`}
       className="group bg-white rounded-lg overflow-hidden border border-gray-100 flex flex-col hover:shadow-md transition-shadow"
     >
       <div className="relative aspect-video overflow-hidden">

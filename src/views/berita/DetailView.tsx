@@ -1,13 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NewsCard, SectionHeader, Sidebar } from "@/components";
-import {
-  getArticleById,
-  getRelatedArticles,
-  getPopularArticles,
-} from "@/lib/fakeDb";
+import { getRelatedArticles, getPopularArticles } from "@/services/berita";
 import { formatFullDate, formatRelativeDate } from "@/lib/formatDate";
-import { notFound } from "next/navigation";
+import type { NewsArticle } from "@/types/news";
 
 const DUMMY_COMMENTS = [
   {
@@ -27,15 +23,12 @@ const DUMMY_COMMENTS = [
 ];
 
 interface DetailViewProps {
-  id: string;
+  article: NewsArticle;
 }
 
-export default function DetailView({ id }: DetailViewProps) {
-  const article = getArticleById(id);
-  if (!article) notFound();
-
-  const related = getRelatedArticles(article.id, article.category, 3);
-  const popular = getPopularArticles(5);
+export default async function DetailView({ article }: DetailViewProps) {
+  const related = await getRelatedArticles(article.id, article.category, 3);
+  const popular = await getPopularArticles(5);
 
   return (
     <div className="bg-white">
@@ -43,7 +36,6 @@ export default function DetailView({ id }: DetailViewProps) {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
           <main>
             <article>
-              {/* BREADCRUMB */}
               <nav
                 className="flex items-center gap-2 text-xs text-gray-500 mb-6"
                 aria-label="Breadcrumb"
@@ -112,7 +104,6 @@ export default function DetailView({ id }: DetailViewProps) {
               </div>
             </article>
 
-            {/* KOMENTAR */}
             <div className="mt-12 bg-gray-50 rounded-xl p-6 border border-gray-100">
               <h2 className="text-lg font-bold text-gray-900 mb-6">
                 Komentar ({DUMMY_COMMENTS.length})
@@ -147,7 +138,6 @@ export default function DetailView({ id }: DetailViewProps) {
               </div>
             </div>
 
-            {/* BERITA TERKAIT */}
             {related.length > 0 && (
               <div className="mt-12 pt-8 border-t border-gray-100">
                 <SectionHeader

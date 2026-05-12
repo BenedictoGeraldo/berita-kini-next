@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_CATEGORIES } from "@/constants/categories";
@@ -16,7 +17,7 @@ export default function Navbar() {
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4 flex items-center py-5 ">
         <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-          <img
+          <Image
             src="/logo.png"
             alt="Berita Kini Logo"
             width={32}

@@ -8,7 +8,18 @@ const nextConfig: NextConfig = {
         hostname: "akcdn.detik.net.id",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "awsimages.detik.net.id",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.antaranews.com",
+        pathname: "/**",
+      },
     ],
+    unoptimized: true,
   },
 };
 

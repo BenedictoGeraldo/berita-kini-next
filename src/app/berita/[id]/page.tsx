@@ -1,17 +1,25 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import DetailView from "@/views/berita/DetailView";
-import { fakeArticles, getArticleById } from "@/lib/fakeDb";
+import { getNewsById } from "@/services/berita";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { CATEGORY_MAP } from "@/constants/categories";
 
 interface Props {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ kategori?: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { id } = await params;
-  const article = getArticleById(id);
+  const { kategori } = await searchParams;
+
+  if (!kategori || !CATEGORY_MAP[kategori]) return {};
+
+  const article = await getNewsById(id, kategori);
   if (!article) return {};
+
   return {
     title: article.title,
     description: article.contentSnippet,
@@ -24,18 +32,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  return fakeArticles.map((article) => ({ id: article.id }));
-}
-
-export default async function BeritaDetailPage({ params }: Props) {
+export default async function BeritaDetailPage({ params, searchParams }: Props) {
   const { id } = await params;
+  const { kategori } = await searchParams;
+
+  if (!kategori || !CATEGORY_MAP[kategori]) notFound();
+
+  const article = await getNewsById(id, kategori);
+  if (!article) notFound();
+
   return (
     <>
       <Navbar />
-      <div>
-        <DetailView id={id} />
-      </div>
+      <DetailView article={article} />
       <Footer />
     </>
   );

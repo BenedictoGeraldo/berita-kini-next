@@ -1,7 +1,7 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import KategoriView from "@/views/kategori/KategoriView";
-import { CATEGORY_MAP } from "@/constants/categories";
+import { CATEGORY_MAP, CATEGORIES } from "@/constants/categories";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  return Object.keys(CATEGORY_MAP).map((id) => ({ id }));
+export function generateStaticParams() {
+  return CATEGORIES.map((cat) => ({ id: cat.id }));
 }
 
 export default async function KategoriPage({ params }: Props) {

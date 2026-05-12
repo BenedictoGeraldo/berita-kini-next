@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { NAV_CATEGORIES } from "@/constants/categories";
 
 export default function Footer() {
@@ -7,7 +8,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <img
+            <Image
               src="/logo.png"
               alt="Berita Kini Logo"
               width={32}

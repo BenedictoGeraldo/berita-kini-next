@@ -22,7 +22,7 @@ export default function HeroCard({ article }: { article: NewsArticle }) {
           <span>{formatRelativeDate(article.publishedAt)}</span>
         </div>
         <Link
-          href={`/berita/${article.id}`}
+          href={`/berita/${article.id}?kategori=${article.category}`}
           className="text-blue-600 text-sm font-medium hover:text-blue-700 hover:underline transition-colors flex items-center gap-1 w-fit"
         >
           Baca Selengkapnya
@@ -30,7 +30,7 @@ export default function HeroCard({ article }: { article: NewsArticle }) {
         </Link>
       </div>
 
-      <div className="relative rounded-xl overflow-hidden aspect-video md:aspect-auto md:min-h-[280px]">
+      <div className="relative rounded-xl overflow-hidden aspect-video md:aspect-auto md:min-h-70">
         <Image
           src={article.image.large}
           alt={article.title}
